@@ -53,5 +53,30 @@ render(
 
 // this is great and works but has changed a lot of code and made it longer. The second way of adding state would be to use hooks. Like so:
 
+import React, { useState } from "react";
+import { render } from "react-dom";
+
+function OneTimeButton(props) {
+  const [clicked, setClicked] = useState(false)
+  
+  function doClick() {
+    props.onCick();
+    setClicked(true)
+  }
+
+  return (
+    <button 
+      onClick={clicked ? undefined : doClick}
+      disabled={clicked}
+    >
+      You Can Only Click This Once
+    </button>
+  );
+}
+
+render(
+  <OneTimeButton />,
+  document.querySelector('#root')
+);
 
 
